@@ -279,25 +279,25 @@ namespace Transistor
                 {
                     if (npolarity == String.Empty || polarity == String.Empty || polarity == npolarity)
                     {
-                        if (nmcpd == String.Empty || mcpd == String.Empty || float.Parse(mcpd) <= float.Parse(nmcpd))
+                        if (nmcpd == String.Empty || mcpd == String.Empty || float.Parse(mcpd) >= float.Parse(nmcpd))
                         {
-                            if (nmcbv == String.Empty || mcbv == String.Empty || float.Parse(mcbv) <= float.Parse(nmcbv))
+                            if (nmcbv == String.Empty || mcbv == String.Empty || float.Parse(mcbv) >= float.Parse(nmcbv))
                             {
-                                if (nmcev == String.Empty || mcev == String.Empty || float.Parse(mcev) <= float.Parse(nmcev))
+                                if (nmcev == String.Empty || mcev == String.Empty || float.Parse(mcev) >= float.Parse(nmcev))
                                 {
-                                    if (nmebv == String.Empty || mebv == String.Empty || float.Parse(mebv) <= float.Parse(nmebv))
+                                    if (nmebv == String.Empty || mebv == String.Empty || float.Parse(mebv) >= float.Parse(nmebv))
                                     {
-                                        if (nmcc == String.Empty || mcc == String.Empty || float.Parse(mcc) <= float.Parse(nmcc))
+                                        if (nmcc == String.Empty || mcc == String.Empty || float.Parse(mcc) >= float.Parse(nmcc))
                                         {
-                                            if (nmojt == String.Empty || mojt == String.Empty || float.Parse(mojt) <= float.Parse(nmojt))
+                                            if (nmojt == String.Empty || mojt == String.Empty || float.Parse(mojt) >= float.Parse(nmojt))
                                             {
-                                                if (nfreq == String.Empty || freq == String.Empty || float.Parse(freq) <= float.Parse(nfreq))
+                                                if (nfreq == String.Empty || freq == String.Empty || float.Parse(freq) >= float.Parse(nfreq))
                                                 {
-                                                    if (ncap == String.Empty || cap == String.Empty || float.Parse(cap) >= float.Parse(ncap))
+                                                    if (ncap == String.Empty || cap == String.Empty || float.Parse(cap) <= float.Parse(ncap))
                                                     {
-                                                        if (nfctr == String.Empty || fctr == String.Empty || float.Parse(fctr) >= float.Parse(nfctr))
+                                                        if (nfctr == String.Empty || fctr == String.Empty || float.Parse(fctr) <= float.Parse(nfctr))
                                                         {
-                                                            if (nnoise == String.Empty || noise == String.Empty || float.Parse(noise) >= float.Parse(nnoise))
+                                                            if (nnoise == String.Empty || noise == String.Empty || float.Parse(noise) <= float.Parse(nnoise))
                                                             {
                                                                 if (npackage == String.Empty || package == String.Empty || package == npackage)
                                                                 {
