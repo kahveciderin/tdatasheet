@@ -231,7 +231,7 @@ namespace Transistor
 
 
                     var sel = Console.ReadLine().Split(' ');
-                    if (sel[0] == "tdatasheet")
+                    if (sel[0] == "tdatasheet" || sel[0] == "tds" || sel[0] == "datasheet" || sel[0] == " tdatasheet" )
                     {
                         switch (sel[1])
                         {
@@ -427,9 +427,9 @@ namespace Transistor
             List<string> transistors = new List<string>();
 
             Console.WriteLine("Press enter to skip any value.");
-            Console.Write("Material = ");
+            Console.Write("Material (Si/Ge) = ");
             string nmaterial = Console.ReadLine();
-            Console.Write("Polarity = ");
+            Console.Write("Polarity (NPN/PNP) = ");
             string npolarity = Console.ReadLine();
             Console.Write("Maximum Collector Power Dissipation (Pc) (W) > ");
             string nmcpd = Console.ReadLine();
@@ -466,6 +466,8 @@ namespace Transistor
             }
             DirectoryInfo d = new DirectoryInfo("datasheets");
 
+            int transistorcounter = 0;
+            int ftransistorcounter = 0;
             foreach (var file in d.GetFiles("*.txt"))
             {
 
@@ -500,7 +502,8 @@ namespace Transistor
 
                 string noise = getBetween(ds, "Noise Figure, dB: ", "\n");
 
-                string package = getBetween(ds, "Package: ", "\n");
+                int pFrom = ds.IndexOf("Package: ") + "Package: ".Length;
+                string package = ds.Substring(pFrom, ds.Length-1 - pFrom);
 
 
 
@@ -539,7 +542,11 @@ namespace Transistor
                                                         {
                                                             if (nnoise == String.Empty || noise == String.Empty || float.Parse(noise) <= float.Parse(nnoise))
                                                             {
-                                                                if (npackage == String.Empty || package == String.Empty || package == npackage)
+                                                                var pr = package.Replace(",", "");
+                                                                var ps = pr.Split(' ');
+                                                                var exists = Array.Exists(ps, element => element == npackage);
+
+                                                                    if (npackage == String.Empty || package == String.Empty || exists)
                                                                 {
 
                                                                     if (onlyihave != "y")
@@ -547,11 +554,13 @@ namespace Transistor
 
                                                                         Console.WriteLine(name);
                                                                         transistors.Add(name);
+                                                                        ftransistorcounter++;
                                                                     }
                                                                     else if (contents.Contains(name))
                                                                     {
                                                                         Console.WriteLine(name);
                                                                         transistors.Add(name);
+                                                                        ftransistorcounter++;
                                                                     }
                                                                 }
                                                             }
@@ -574,12 +583,12 @@ namespace Transistor
 
 
                 // Console.WriteLine(name + "\n" + material + "\n" + polarity + "\n" + mcpd + "\n" + mcbv + "\n" + mcev + "\n" + mebv + "\n" + mcc + "\n" + mojt + "\n" + freq + "\n" + cap + "\n" + fctr + "\n" + noise + "\n" + package + "\n");
-
+                transistorcounter++;
             }
 
 
 
-
+            Console.WriteLine("\n{0} result(s) from {1} transistors", ftransistorcounter,transistorcounter );
             File.Delete("apptransistors.txt");
             File.WriteAllText("apptransistors.txt", String.Join("\n", transistors.ToArray()));
             Console.WriteLine("\n\nSaved to apptransistors.txt");
